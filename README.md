@@ -6,7 +6,7 @@ The easiest, most common sense configuration management tool... because you just
 
 Add this line to your application's Gemfile:
 
-    gem 'fucking_shell_scripts'
+    gem 'fucking_scripts_digital_ocean'
 
 And then execute:
 
@@ -14,7 +14,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install fucking_shell_scripts
+    $ gem install fucking_scripts_digital_ocean
 
 ## Development
 

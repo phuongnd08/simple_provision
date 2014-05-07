@@ -1,14 +1,14 @@
-require "fucking_shell_scripts/version"
+require "fucking_scripts_digital_ocean/version"
 
 begin
   require 'pry'
 rescue LoadError
 end
 
-require_relative 'fucking_shell_scripts/cli'
-require_relative 'fucking_shell_scripts/configuration'
-require_relative 'fucking_shell_scripts/connection'
-require_relative 'fucking_shell_scripts/scp'
-require_relative 'fucking_shell_scripts/server'
+require_relative 'fucking_scripts_digital_ocean/cli'
+require_relative 'fucking_scripts_digital_ocean/configuration'
+require_relative 'fucking_scripts_digital_ocean/connection'
+require_relative 'fucking_scripts_digital_ocean/scp'
+require_relative 'fucking_scripts_digital_ocean/server'
 
 require_relative 'ext/fog'
