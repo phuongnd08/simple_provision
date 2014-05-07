@@ -1,5 +1,14 @@
 # This is based on the awesome work on Fucking Shell Scripts gem
 
+```
+──────────────────────────────────────────────────────
+Don't forget to also checkout and contribute to
+https://github.com/phuongnd08/fucking_scripts_recipes
+
+Let's build awesome recipes to automate deployment
+──────────────────────────────────────────────────────
+```
+
 Fucking Shell Scripts provides a way to easily config your EC2 server
 without all the shitty headache of Chef and Puppy.
 
