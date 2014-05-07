@@ -9,7 +9,6 @@ OptionParser.new do |opts|
   opts.banner = "Usage: fss [options] type"
 
   opts.on('--droplet-name NAME', 'An exiting Droplet Name' ) do |name|
-    require 'byebug'; byebug
     options[:droplet_name] = name
   end
 
