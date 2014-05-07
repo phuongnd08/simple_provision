@@ -16,7 +16,14 @@ module FuckingScriptsDigitalOcean
     private
 
     def create_local_archive
-      includes = @opts.fetch(:files) + @opts.fetch(:scripts)
+      files = @opts[:files] || []
+      scripts = @opts[:scripts] || []
+      includes = files + scripts
+
+      if includes.empty?
+        raise "Both files and scripts are empty. You should provide some"
+      end
+
       `tar -czf #{FILENAME} #{includes.join(" ")}`
     end
 
