@@ -10,7 +10,7 @@ This is an effort to bring the goodness of Fucking Shell Scripts to
 Digital Ocean servers.
 
 I don't use shell in the name of the gems because the gem actually
-help you to run not only shell script, but also ruby and python script
+helps you to run not only shell script, but also ruby and python script
 to handle complex build.
 
 Just remember that you need to use shell to install ruby/python first,
@@ -40,8 +40,8 @@ This follow the simple convention of Fucking Shell Scripts:
     └── search-service.yml
 ```
 
-So: You put definition of each type of server in servers/type.yml
-In files and scripts folder, You place files and scripts that will be
+So: You put definition of each type of server in `servers/type.yml`.
+In `files` and `scripts` folder, you place files and scripts that will be
 uploaded to the Digital Ocean droplet and executed.
 
 ## Installation
