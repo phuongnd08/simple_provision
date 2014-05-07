@@ -51,6 +51,8 @@ class Fog::SSH::Real
   end
 end
 
+require "fog/digitalocean/models/compute/server"
+
 # Monkey patch Digital Ocean to properly return public_ip_address to used in scp
 Fog::Compute::DigitalOcean::Server.class_eval do
   def public_ip_address
