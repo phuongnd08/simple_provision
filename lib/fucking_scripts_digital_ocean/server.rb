@@ -27,7 +27,9 @@ module FuckingScriptsDigitalOcean
           "Please specify the Droplet Name using the --droplet-name option."
       end
       @server = connection.servers.detect { |server| server.name == droplet_name }
-      @server.private_key_path = options.fetch(:private_key_path)
+      if options.has_key?(:private_key_path)
+        @server.private_key_path = options.fetch(:private_key_path)
+      end
       @server
     end
 
