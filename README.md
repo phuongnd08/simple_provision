@@ -1,6 +1,6 @@
 # FuckingScriptsDigitalOcean
 
-The easiest, most common sense configuration management tool... because you just use fucking shell scripts.
+The easiest, most common sense configuration management tool... because you just use fucking shell, ruby, python scripts.
 
 ## Installation
 
@@ -16,16 +16,7 @@ Or install it yourself as:
 
     $ gem install fucking_scripts_digital_ocean
 
-## Development
-
-During development of a script, use vagrant:
-
-    vagrant up
-    cd /vagrant
-
-`cd /vagrant` will put you in the root folder of the project so that you can run a script such as `./search-service.sh`.
-
-## Servers
+## Servers Configuration
 
 ### Defaults
 
@@ -34,34 +25,25 @@ Server defaults are defined by creating the following file:
 `./servers/defaults.yml`
 
 ```yaml
-name: ppd instance
-security_groups: pd-app-server
-instance_type: c1.xlarge
-image_id: ami-e76ac58e
-availability_zone: us-east-1d
-region: us-east-1
-key_name: pd-app-server
 private_key_path: /Users/bhilkert/.ssh/pd-app-server
 ```
 
 To define a server, create a yaml file in the `./servers` directory with the following format:
 
-`./servers/search-service.yml`
+`./servers/my-awesome-server.yml`
 
 ```yaml
-name: search-service
-security_groups: search-service
-instance_type: c1.medium
-image_id: ami-90374bf9
-
+files:
+  - files/credentials.yml
 scripts:
-  - scripts/apt.sh
-  - scripts/env.sh
   - scripts/git.sh
   - scripts/ruby.sh
   - scripts/rubygems.sh
   - scripts/redis.sh
 ```
+
+## Set up your Digital Ocean server:
+`fsdo my-awesome-server --droplet-name YOUR_DROPLET_NAME`
 
 ## Contributing
 
