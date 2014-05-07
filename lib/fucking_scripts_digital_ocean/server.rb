@@ -15,6 +15,7 @@ module FuckingScriptsDigitalOcean
     end
 
     def build
+      raise "Build is not supported yet"
       @server = connection.servers.create(
         image_id: options.fetch(:image),
         flavor_id: options.fetch(:size),
