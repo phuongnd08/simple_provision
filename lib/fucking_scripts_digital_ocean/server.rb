@@ -22,7 +22,10 @@ module FuckingScriptsDigitalOcean
     attr_reader :options, :connection
 
     def get(droplet_name)
-      raise FuckingScriptsDigitalOcean::Server::MissingDropletName , "Please specify the Droplet Name using the --droplet-name option." if instance_id.nil?
+      if droplet_name.nil?
+        raise FuckingScriptsDigitalOcean::Server::MissingDropletName ,
+          "Please specify the Droplet Name using the --droplet-name option."
+      end
       @server = connection.servers.get(droplet_name)
       @server.private_key_path = options.fetch(:private_key_path)
       @server
