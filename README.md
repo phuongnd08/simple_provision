@@ -91,7 +91,15 @@ scripts:
   - scripts/ruby.sh
   - scripts/rubygems.sh
   - scripts/redis.sh
+env:
+  DBNAME: my_db_name
+  WEBROOT: /var/www/app
 ```
+
+#### Passing variables to scripts
+Variables defined in `env` will be exposed to scripts during execution.
+That way you can use the same scripts for different type of server and
+still be able to produce different outcomes.
 
 ## Set up your Digital Ocean server:
 `fsdo my-awesome-server --droplet-name YOUR_DROPLET_NAME`
