@@ -17,8 +17,7 @@ module FuckingScriptsDigitalOcean
         Fog::Compute.new(
           provider: "DigitalOcean",
           digitalocean_client_id: ENV["DIGITAL_OCEAN_CLIENT_ID"],
-          digitalocean_api_key: ENV["DIGITAL_OCEAN_API_KEY"],
-          name: @opts.fetch(:name)
+          digitalocean_api_key: ENV["DIGITAL_OCEAN_API_KEY"]
         )
       end
     end
