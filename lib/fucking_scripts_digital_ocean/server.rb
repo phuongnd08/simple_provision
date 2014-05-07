@@ -10,8 +10,9 @@ module FuckingScriptsDigitalOcean
     end
 
     def configure
+      require 'byebug'; byebug
       get(options[:droplet_name]) if server.nil?
-      raise ServerNotFound, "Unable to find server. Try specifying the server ID." if server.nil?
+      raise ServerNotFound, "Unable to find server with Droplet name #{options[:droplet_name]}." if server.nil?
 
       FuckingScriptsDigitalOcean::SCP.new(server, options).to_server
       server.ssh(options.fetch(:scripts))
@@ -26,6 +27,7 @@ module FuckingScriptsDigitalOcean
         raise FuckingScriptsDigitalOcean::Server::MissingDropletName ,
           "Please specify the Droplet Name using the --droplet-name option."
       end
+      require 'byebug'; byebug
       @server = connection.servers.detect { |server| server.name == droplet_name }
       if options.has_key?(:private_key_path)
         @server.private_key_path = options.fetch(:private_key_path)
