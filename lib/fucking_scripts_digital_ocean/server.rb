@@ -1,6 +1,6 @@
 module FuckingScriptsDigitalOcean
   class Server
-    NoServerSelected = Class.new(StandardError)
+    ServerNotFound = Class.new(StandardError)
     MissingDropletName = Class.new(StandardError)
 
     attr_reader :server
@@ -11,7 +11,7 @@ module FuckingScriptsDigitalOcean
 
     def configure
       get(options[:droplet_name]) if server.nil?
-      raise NoServerSelected, "Unable to find server. Try specifying the server ID." if server.nil?
+      raise ServerNotFound, "Unable to find server. Try specifying the server ID." if server.nil?
 
       FuckingScriptsDigitalOcean::SCP.new(server, options).to_server
       server.ssh(options.fetch(:scripts))
@@ -26,8 +26,7 @@ module FuckingScriptsDigitalOcean
         raise FuckingScriptsDigitalOcean::Server::MissingDropletName ,
           "Please specify the Droplet Name using the --droplet-name option."
       end
-      require "byebug"; byebug
-      @server = connection.servers.get(droplet_name)
+      @server = connection.servers.detect { |server| server.name == droplet_name }
       @server.private_key_path = options.fetch(:private_key_path)
       @server
     end
