@@ -1,7 +1,7 @@
 module FuckingScriptsDigitalOcean
   class Server
     NoServerSelected = Class.new(StandardError)
-    MissingInstanceID = Class.new(StandardError)
+    MissingDropletName = Class.new(StandardError)
 
     attr_reader :server
 
@@ -44,7 +44,7 @@ module FuckingScriptsDigitalOcean
     end
 
     def configure
-      get(options[:instance_id]) if server.nil?
+      get(options[:droplet_name]) if server.nil?
       raise NoServerSelected, "Unable to find server. Try specifying the server ID." if server.nil?
 
       FuckingScriptsDigitalOcean::SCP.new(server, options).to_server
@@ -55,9 +55,9 @@ module FuckingScriptsDigitalOcean
 
     attr_reader :options, :connection
 
-    def get(instance_id)
-      raise FuckingScriptsDigitalOcean::Server::MissingInstanceID , "Please specify the instance ID using the --instance-id option." if instance_id.nil?
-      @server = connection.servers.get(instance_id)
+    def get(droplet_name)
+      raise FuckingScriptsDigitalOcean::Server::MissingDropletName , "Please specify the Droplet Name using the --droplet-name option." if instance_id.nil?
+      @server = connection.servers.get(droplet_name)
       @server.private_key_path = options.fetch(:private_key_path)
       @server
     end
