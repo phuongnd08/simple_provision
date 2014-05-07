@@ -1,11 +1,9 @@
 require 'yaml'
-require 'erb'
 
-module FuckingShellScripts
+module FuckingScriptsDigitalOcean
   class Configuration
     MissingServerType = Class.new(StandardError)
     MissingServerConfiguration = Class.new(StandardError)
-    MissingCloudConfiguration = Class.new(StandardError)
 
     attr_reader :options
 
@@ -15,14 +13,13 @@ module FuckingShellScripts
       read_and_parse_server_options
 
       raise MissingServerType, "Please specify a type of server you want to create using the --type option" unless options[:type]
-      raise MissingCloudConfiguration, "Please specify settings for your provider per http://fog.io/about/provider_documentation.html" unless options[:cloud]
     end
 
     private
 
     def default_options
       begin
-        YAML.load(ERB.new(File.read('servers/defaults.yml')).result)
+        YAML.load(File.read('servers/defaults.yml'))
       rescue Errno::ENOENT
         {}
       end
@@ -30,7 +27,7 @@ module FuckingShellScripts
 
     def server_options
       begin
-        YAML.load(ERB.new(File.read(server_file)).result)
+        YAML.load(File.read(server_file))
       rescue Errno::ENOENT
         raise MissingServerConfiguration, "Please create a configuration file './servers/#{type}.yml'"
       end
@@ -42,12 +39,11 @@ module FuckingShellScripts
 
     def read_and_parse_server_options
       options_string_hash = default_options.merge(server_options).merge(@command_line_options)
-      @options = options_string_hash.symbolize_keys_deep!
+      @options = Hash[options_string_hash.map{ |(k,v)| [k.to_sym, v] }]
     end
 
     def type
       @command_line_options[:type]
     end
-
   end
 end

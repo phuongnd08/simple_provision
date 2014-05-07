@@ -5,7 +5,7 @@ require 'fucking_shell_scripts/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "fucking_shell_scripts"
-  spec.version       = FuckingShellScripts::VERSION
+  spec.version       = FuckingScriptsDigitalOcean::VERSION
   spec.authors       = ["Brandon Hilkert"]
   spec.email         = ["brandonhilkert@gmail.com"]
   spec.description   = %q{The easiest, most common sense configuration management tool... because you just use fucking shell scripts.}
@@ -21,7 +21,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
-  spec.add_development_dependency "pry"
 
   spec.add_dependency "fog", "~> 1.14.0"
 end

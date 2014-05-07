@@ -26,22 +26,18 @@ OptionParser.new do |opts|
   end
 
   opts.on('-v', '--version', 'Show version' ) do
-    puts FuckingShellScripts::VERSION
-    exit
+    puts FuckingScriptsDigitalOcean::Version
   end
 end.parse!
 
 options.merge!(type: ARGV.first)
 
-abort("Specify the type of server to build/configure as the first argument (ie. fss app-server)") unless options[:type]
-
-cli = FuckingShellScripts::CLI.new(options)
+cli = FuckingScriptsDigitalOcean::CLI.new(options)
 
 if options[:build]
   cli.build
 
 elsif options[:configure]
-  abort("Specify the server instance ID to configure using the --instance-id option") unless options[:instance_id]
   cli.configure
 
 else

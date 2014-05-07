@@ -1,4 +1,4 @@
-module FuckingShellScripts
+module FuckingScriptsDigitalOcean
   class Server
     NoServerSelected = Class.new(StandardError)
     MissingInstanceID = Class.new(StandardError)
@@ -47,7 +47,7 @@ module FuckingShellScripts
       get(options[:instance_id]) if server.nil?
       raise NoServerSelected, "Unable to find server. Try specifying the server ID." if server.nil?
 
-      FuckingShellScripts::SCP.new(server, options).to_server
+      FuckingScriptsDigitalOcean::SCP.new(server, options).to_server
       server.ssh(options.fetch(:scripts))
     end
 
@@ -56,7 +56,7 @@ module FuckingShellScripts
     attr_reader :options, :connection
 
     def get(instance_id)
-      raise FuckingShellScripts::Server::MissingInstanceID , "Please specify the instance ID using the --instance-id option." if instance_id.nil?
+      raise FuckingScriptsDigitalOcean::Server::MissingInstanceID , "Please specify the instance ID using the --instance-id option." if instance_id.nil?
       @server = connection.servers.get(instance_id)
       @server.private_key_path = options.fetch(:private_key_path)
       @server
