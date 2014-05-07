@@ -1,3 +1,5 @@
+require 'shellwords'
+
 module FuckingScriptsDigitalOcean
   class Server
     ServerNotFound = Class.new(StandardError)
@@ -14,7 +16,20 @@ module FuckingScriptsDigitalOcean
       raise ServerNotFound, "Unable to find server with Droplet name #{options[:droplet_name]}." if server.nil?
 
       FuckingScriptsDigitalOcean::SCP.new(server, options).to_server
-      server.ssh(options.fetch(:scripts))
+      scripts = options.fetch(:scripts).map do |script|
+        "#{environment_exports} bash -c '#{script}'"
+      end
+      server.ssh(scripts)
+    end
+
+    def environment_exports
+      @environment_exports ||= begin
+                                 if options[:env].nil?
+                                   ""
+                                 else
+                                   options[:env].map { |k, v| [k, Shellwords.escape(v)].join("=") }.join(" ")
+                                 end
+                               end
     end
 
     private
