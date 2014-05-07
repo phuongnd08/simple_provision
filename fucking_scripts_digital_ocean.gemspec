@@ -6,11 +6,11 @@ require 'fucking_scripts_digital_ocean/version'
 Gem::Specification.new do |spec|
   spec.name          = "fucking_scripts_digital_ocean"
   spec.version       = FuckingScriptsDigitalOcean::VERSION
-  spec.authors       = ["Brandon Hilkert"]
-  spec.email         = ["brandonhilkert@gmail.com"]
-  spec.description   = %q{The easiest, most common sense configuration management tool... because you just use fucking shell scripts.}
-  spec.summary       = %q{The easiest, most common sense configuration management tool... because you just use fucking shell scripts.}
-  spec.homepage      = "https://github.com/brandonhilkert/fucking_scripts_digital_ocean"
+  spec.authors       = ["Phuong Gia Su", "Brandon Hilkert"]
+  spec.email         = ["phuongnd08@gmail.com", "brandonhilkert@gmail.com"]
+  spec.description   = %q{The easiest, most common sense configuration management tool... because you just use fucking simple scripts.}
+  spec.summary       = %q{The easiest, most common sense configuration management tool... because you just use fucking simple scripts.}
+  spec.homepage      = "https://github.com/phuongnd08/fucking_scripts_digital_ocean"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
