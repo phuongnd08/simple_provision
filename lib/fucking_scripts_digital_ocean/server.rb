@@ -26,6 +26,7 @@ module FuckingScriptsDigitalOcean
         raise FuckingScriptsDigitalOcean::Server::MissingDropletName ,
           "Please specify the Droplet Name using the --droplet-name option."
       end
+      require "byebug"; byebug
       @server = connection.servers.get(droplet_name)
       @server.private_key_path = options.fetch(:private_key_path)
       @server
