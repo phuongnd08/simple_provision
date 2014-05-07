@@ -1,6 +1,48 @@
-# FuckingScriptsDigitalOcean
+# This is based on the awesome work on Fucking Shell Scripts gem
 
-The easiest, most common sense configuration management tool... because you just use fucking shell, ruby, python scripts.
+Fucking Shell Scripts provides a way to easily config your EC2 server
+without all the shitty headache of Chef and Puppy.
+
+Unfortunately, it doesn't provide a way to work with Digital Ocean
+server yet.
+
+This is an effort to bring the goodness of Fucking Shell Scripts to
+Digital Ocean servers.
+
+I don't use shell in the name of the gems because the gem actually
+help you to run not only shell script, but also ruby and python script
+to handle complex build.
+
+Just remember that you need to use shell to install ruby/python first,
+and then you can start use ruby/python.
+
+This follow the simple convention of Fucking Shell Scripts:
+
+```
+./config_management
+├── files
+│   ├── keys
+│   │   └── deploy_key
+│   └── rails_config
+│       └── database.yml
+├── scripts
+│   ├── apt.sh
+│   ├── deploy_key.sh
+│   ├── git.sh
+│   ├── redis.rb
+│   ├── ruby2.sh
+│   ├── rubygems.sh
+│   ├── install_tornado.py
+│   ├── search_service_code.sh
+│   └── search_service_env.sh
+└── servers
+    ├── defaults.yml
+    └── search-service.yml
+```
+
+So: You put definition of each type of server in servers/type.yml
+In files and scripts folder, You place files and scripts that will be
+uploaded to the Digital Ocean droplet and executed.
 
 ## Installation
 
