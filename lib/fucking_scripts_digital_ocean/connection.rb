@@ -2,23 +2,23 @@ require 'fog'
 
 module FuckingScriptsDigitalOcean
   class Connection
-    MissingAWSCredentials = Class.new(StandardError)
+    MissingDigitalOceanCredentials = Class.new(StandardError)
 
     def initialize(opts)
       @opts = opts
 
-      if ENV["DIGITAL_OCEAN"].nil? || ENV["AWS_SECRET_ACCESS_KEY"].nil?
-        raise FuckingScriptsDigitalOcean::Connection::MissingAWSCredentials, "Make sure AWS_ACCESS_KEY and AWS_SECRET_ACCESS_KEY are environmental variables with your credentials"
+      if ENV["DIGITAL_OCEAN_API_KEY"].nil? || ENV["DIGITAL_OCEAN_CLIENT_ID"].nil?
+        raise FuckingScriptsDigitalOcean::Connection::MissingDigitalOceanCredentials, "Make sure DIGITAL_OCEAN_API_KEY and DIGITAL_OCEAN_CLIENT_ID are environmental variables with your credentials"
       end
     end
 
     def connection
       @connection ||= begin
         Fog::Compute.new(
-          provider: "AWS",
-          aws_access_key_id: ENV["AWS_ACCESS_KEY"],
-          aws_secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"],
-          region: @opts.fetch(:region)
+          provider: "DigitalOcean",
+          digitalocean_client_id: ENV["DIGITAL_OCEAN_CLIENT_ID"],
+          digitalocean_api_key: ENV["DIGITAL_OCEAN_API_KEY"],
+          name: @opts.fetch(:name)
         )
       end
     end
