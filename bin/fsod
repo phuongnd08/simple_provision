@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'optparse'
-require_relative '../lib/fucking_shell_scripts'
+require_relative '../lib/fucking_scripts_digital_ocean'
 
 options = {}
 
