@@ -1,6 +1,6 @@
 require 'shellwords'
 
-module FuckingScriptsDigitalOcean
+module SimpleProvision
   class Server
     ServerNotFound = Class.new(StandardError)
     MissingDropletName = Class.new(StandardError)
@@ -15,7 +15,7 @@ module FuckingScriptsDigitalOcean
       get(options[:droplet_name]) if server.nil?
       raise ServerNotFound, "Unable to find server with Droplet name #{options[:droplet_name]}." if server.nil?
 
-      FuckingScriptsDigitalOcean::SCP.new(server, options).to_server
+      SimpleProvision::SCP.new(server, options).to_server
       scripts = options.fetch(:scripts).map do |script|
         "#{environment_exports} bash -c '#{script}'"
       end
@@ -38,7 +38,7 @@ module FuckingScriptsDigitalOcean
 
     def get(droplet_name)
       if droplet_name.nil?
-        raise FuckingScriptsDigitalOcean::Server::MissingDropletName ,
+        raise SimpleProvision::Server::MissingDropletName ,
           "Please specify the Droplet Name using the --droplet-name option."
       end
       @server = connection.servers.detect { |server| server.name == droplet_name }

@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'fucking_scripts_digital_ocean/version'
+require 'simple_provision/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "fucking_scripts_digital_ocean"
-  spec.version       = FuckingScriptsDigitalOcean::VERSION
+  spec.name          = "simple_provision"
+  spec.version       = SimpleProvision::VERSION
   spec.authors       = ["Phuong Gia Su", "Brandon Hilkert"]
   spec.email         = ["phuongnd08@gmail.com", "brandonhilkert@gmail.com"]
   spec.description   = %q{The easiest, most common sense configuration management tool... because you just use fucking simple scripts.}
   spec.summary       = %q{The easiest, most common sense configuration management tool... because you just use fucking simple scripts.}
-  spec.homepage      = "https://github.com/phuongnd08/fucking_scripts_digital_ocean"
+  spec.homepage      = "https://github.com/phuongnd08/simple_provision"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

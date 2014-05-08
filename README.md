@@ -1,20 +1,23 @@
 # Introduction
 This is based on the work that brandonhilkert initally carried to automate
-EC2 deployment with YAML and SHELL script, bring the good spirit: SIMPLE, 
-and JUST WORK to the world of Digital Ocean.
+EC2 deployment with YAML and SHELL script. It tries to bring the good spirit: SIMPLE,
+and JUST WORK to the world of Digital Ocean. So you own a Digital Ocean?
+
+If you have suffer days of headache with Chef and Puppet, time for a new
+simple way of provision. Let's rock.
 
 ### Recipes repo
 
-Don't forget to also checkout and contribute to
-https://github.com/phuongnd08/fucking_scripts_recipes
+Don't forget to also checkout the recipes collection
+https://github.com/phuongnd08/simple_privision_recipes
 
-Let's build awesome recipes to automate server provision
+# How it works
+This gem carries the provision by uploading a set of scripts (and
+files) to the server and execute there.
 
-# Notes
-Remember that this gem treats RUBY and PYTHON the same way it treats the SHELL
-script. As long as you write your provision script in proper format,
-it will be executed. I often use a mix of SHELL and RUBY scripts to accomplish
-the task. SHELL for some simple stuff and RUBY when I need to complete
+It's up to you to choose the language you want. I often use a mix of
+SHELL and RUBY scripts to accomplish the task. SHELL for some simple stuff
+like install a package on the server and RUBY when I need to complete
 some tricky part of the configuration.
 
 Just remember that you need to use a shell script to install ruby/python first,
@@ -23,7 +26,9 @@ as simple as create a bash contains "yum install ruby(python) -y" and include
 it in the top of the `scripts` section in your server definition file.
 
 # Project Structure
-As simple as it could: One or few servers definition written in YAML + setup scripts written in SHELL, RUBY and PYTHON + text files as resource. It's up to you to use ERB, HAML or any kind of template processors.
+As simple as it could: One or few servers definition written in YAML + setup scripts written in
+SHELL, RUBY and PYTHON + text files as resource.
+It's up to you to use ERB, HAML or any kind of template processors.
 
 ```
 ./provisions
@@ -55,7 +60,7 @@ uploaded to the Digital Ocean droplet and executed.
 
 Add this line to your application's Gemfile:
 
-    gem 'fucking_scripts_digital_ocean'
+    gem 'simple_provision'
 
 And then execute:
 
@@ -63,21 +68,12 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install fucking_scripts_digital_ocean
+    $ gem install simple_provision
 
 ## Servers Configuration
 
-### Defaults
-
-Server defaults are defined by creating the following file:
-
-`./servers/defaults.yml`
-
-```yaml
-private_key_path: /Users/bhilkert/.ssh/pd-app-server
-```
-
-To define a server, create a yaml file in the `./servers` directory with the following format:
+### Server Definition
+To define a server type, create a yaml file in the `./servers` directory with the following format:
 
 `./servers/my-awesome-server.yml`
 
@@ -94,7 +90,16 @@ env:
   WEBROOT: /var/www/app
 ```
 
-#### Passing variables to scripts
+### Shared Definitions
+
+You can share definitions across server types with `./servers/defaults.yml`
+
+```yaml
+private_key_path: /Users/bhilkert/.ssh/pd-app-server
+```
+
+
+### Passing variables to scripts
 Variables defined in `env` will be exposed to scripts during execution.
 That way you can use the same scripts for different type of server and
 still be able to produce different outcomes.

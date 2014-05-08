@@ -1,4 +1,4 @@
-module FuckingScriptsDigitalOcean
+module SimpleProvision
   class SCP
     FILENAME = "fss.tar.gz"
 

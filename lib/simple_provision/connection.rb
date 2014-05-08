@@ -1,6 +1,6 @@
 require 'fog'
 
-module FuckingScriptsDigitalOcean
+module SimpleProvision
   class Connection
     MissingDigitalOceanCredentials = Class.new(StandardError)
 
@@ -8,7 +8,7 @@ module FuckingScriptsDigitalOcean
       @opts = opts
 
       if ENV["DIGITAL_OCEAN_API_KEY"].nil? || ENV["DIGITAL_OCEAN_CLIENT_ID"].nil?
-        raise FuckingScriptsDigitalOcean::Connection::MissingDigitalOceanCredentials, "Make sure DIGITAL_OCEAN_API_KEY and DIGITAL_OCEAN_CLIENT_ID are environmental variables with your credentials"
+        raise SimpleProvision::Connection::MissingDigitalOceanCredentials, "Make sure DIGITAL_OCEAN_API_KEY and DIGITAL_OCEAN_CLIENT_ID are environmental variables with your credentials"
       end
     end
 

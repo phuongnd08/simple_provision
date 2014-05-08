@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'optparse'
-require_relative '../lib/fucking_scripts_digital_ocean'
+require_relative '../lib/simple_provision'
 
 options = {}
 
@@ -18,11 +18,11 @@ OptionParser.new do |opts|
   end
 
   opts.on('-v', '--version', 'Show version' ) do
-    puts FuckingScriptsDigitalOcean::Version
+    puts SimpleProvision::Version
   end
 end.parse!
 
 options.merge!(type: ARGV.first)
 
-cli = FuckingScriptsDigitalOcean::CLI.new(options)
+cli = SimpleProvision::CLI.new(options)
 cli.configure

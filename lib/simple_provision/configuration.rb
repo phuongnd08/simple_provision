@@ -1,6 +1,6 @@
 require 'yaml'
 
-module FuckingScriptsDigitalOcean
+module SimpleProvision
   class Configuration
     MissingServerType = Class.new(StandardError)
     MissingServerConfiguration = Class.new(StandardError)

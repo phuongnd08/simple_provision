@@ -1,8 +1,8 @@
-module FuckingScriptsDigitalOcean
+module SimpleProvision
   class CLI
     def initialize(opts = {})
       @opts = opts
-      @connection = FuckingScriptsDigitalOcean::Connection.new(options).connection
+      @connection = SimpleProvision::Connection.new(options).connection
     end
 
     def bootstrap
@@ -20,11 +20,11 @@ module FuckingScriptsDigitalOcean
     private
 
     def server
-      FuckingScriptsDigitalOcean::Server.new(@connection, options)
+      SimpleProvision::Server.new(@connection, options)
     end
 
     def options
-      @options ||= FuckingScriptsDigitalOcean::Configuration.new(@opts).options
+      @options ||= SimpleProvision::Configuration.new(@opts).options
     end
   end
 end
