@@ -1,10 +1,17 @@
 # Introduction
 This is based on the work that brandonhilkert initally carried to automate
-EC2 deployment with YAML and SHELL script. It tries to bring the good spirit: SIMPLE,
-and JUST WORK to the world of Digital Ocean. So you own a Digital Ocean?
+EC2 instance provision with YAML and SHELL script. It tries to bring the good spirit: SIMPLE, and JUST WORK to the world of Digital Ocean.
 
-If you have suffer days of headache with Chef and Puppet, time for a new
-simple way of provision. Let's rock.
+If you own a Digital Ocean, here is my advice: Chef and Puppet is shitty
+thing that just create more problems than it solves. It will take you
+days even weeks just to get familar and put things in the right order.
+
+With simple_provision, you get your hand dirty in a few minutes and
+we have the working provision profile in just half an hour. From that
+moment, provision another instance is just the matter of kicking off
+a command from the terminal.
+
+Let's rock.
 
 ### Recipes repo
 
