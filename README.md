@@ -1,15 +1,13 @@
 # This is based on the awesome work on Fucking Shell Scripts gem
 
-```
 ──────────────────────────────────────────────────────
 Don't forget to also checkout and contribute to
 https://github.com/phuongnd08/fucking_scripts_recipes
 
-Let's build awesome recipes to automate deployment
+Let's build awesome recipes to automate server provision
 ──────────────────────────────────────────────────────
-```
 
-Fucking Shell Scripts provides a way to easily config your EC2 server
+Fucking Shell Scripts provides a way to easily provision your EC2 server
 without all the shitty headache of Chef and Puppy.
 
 Unfortunately, it doesn't provide a way to work with Digital Ocean
@@ -22,7 +20,7 @@ I don't use shell in the name of the gems because the gem actually
 helps you to run not only shell script, but also ruby and python script
 to handle complex build.
 
-Just remember that you need to use shell to install ruby/python first,
+Just remember that you need to use a shell script to install ruby/python first,
 and then you can start use ruby/python.
 
 This follow the simple convention of Fucking Shell Scripts:
