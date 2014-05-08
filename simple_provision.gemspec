@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = SimpleProvision::VERSION
   spec.authors       = ["Phuong Gia Su", "Brandon Hilkert"]
   spec.email         = ["phuongnd08@gmail.com", "brandonhilkert@gmail.com"]
-  spec.description   = %q{The easiest, most common sense configuration management tool... because you just use fucking simple scripts.}
-  spec.summary       = %q{The easiest, most common sense configuration management tool... because you just use fucking simple scripts.}
+  spec.description   = %q{The easiest, most common sense server provision tool.}
+  spec.summary       = %q{The easiest, most common sense server provision tool.}
   spec.homepage      = "https://github.com/phuongnd08/simple_provision"
   spec.license       = "MIT"
 
