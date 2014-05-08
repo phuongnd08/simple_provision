@@ -1,5 +1,5 @@
 # Introduction
-This based on the work that brandonhilkert initally carried to automate
+This is based on the work that brandonhilkert initally carried to automate
 EC2 deployment with YAML and SHELL script, bring the good spirit: SIMPLE, 
 and JUST WORK to the world of Digital Ocean.
 
