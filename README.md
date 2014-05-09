@@ -11,8 +11,8 @@ we have the working provision profile in just half an hour. From that
 moment, provision another instance is just the matter of kicking off
 a command from the terminal.
 
-I use simple_provision with mina in my Rails project and the combination
-has been working really well for us.
+I use simple_provision with mina in my Rails projects and the combination
+has been working really well for me.
 
 Let's rock.
 
