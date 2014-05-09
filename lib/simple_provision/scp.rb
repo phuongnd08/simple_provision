@@ -1,6 +1,6 @@
 module SimpleProvision
   class SCP
-    FILENAME = "fss.tar.gz"
+    FILENAME = "simpro.tar.gz"
 
     def initialize(server, opts)
       @server, @opts = server, opts
@@ -24,11 +24,21 @@ module SimpleProvision
         raise "Both files and scripts are empty. You should provide some"
       end
 
-      `tar -czf #{FILENAME} #{includes.join(" ")}`
+      system("mkdir tmp")
+      system("mkdir tmp/files")
+      system("mkdir tmp/scripts")
+      files.each do |f|
+        system("cp #{f} tmp/files/")
+      end
+      scripts.each do |f|
+        system("cp #{f} tmp/scripts/")
+      end
+
+      system("cd tmp && tar -czf #{FILENAME} files/ scripts/")
     end
 
     def scp_files_to_server
-      @server.scp(FILENAME, ".")
+      @server.scp("tmp/#{FILENAME}", ".")
     end
 
     def extract_remote_archive
@@ -36,7 +46,7 @@ module SimpleProvision
     end
 
     def remove_local_archive
-      `rm -f #{FILENAME}`
+      `rm -rf tmp`
     end
   end
 end
