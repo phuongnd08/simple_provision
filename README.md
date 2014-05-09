@@ -115,7 +115,7 @@ That way you can use the same scripts for different type of server and
 still be able to produce different outcomes.
 
 ## Provision your Digital Ocean server:
-`simpro y-awesome-server --droplet-name YOUR_DROPLET_NAME`
+`simpro my-awesome-server --droplet-name YOUR_DROPLET_NAME`
 
 ## Contributing
 
