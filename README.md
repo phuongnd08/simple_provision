@@ -19,7 +19,7 @@ Let's rock.
 ### Recipes repo
 
 Don't forget to also checkout the recipes collection
-https://github.com/phuongnd08/simple_privision_recipes
+https://github.com/phuongnd08/simple_provision_recipes
 
 # How it works
 This gem carries the provision by uploading a set of scripts (and
