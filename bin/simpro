@@ -4,25 +4,13 @@ require 'optparse'
 require_relative '../lib/simple_provision'
 
 options = {}
+invalid_argument = false
+invalid_argument = true if ARGV.length != 2
+unless invalid_argument
+  username, host = ARGV.last.split('@')
+  invalid_argument = username.nil? || host.nil?
+end
 
-OptionParser.new do |opts|
-  opts.banner = "Usage: fss [options] type"
-
-  opts.on('--droplet-name NAME', 'An exiting Droplet Name' ) do |name|
-    options[:droplet_name] = name
-  end
-
-  opts.on('-h', '--help', 'Display this screen' ) do
-    puts opts
-    exit
-  end
-
-  opts.on('-v', '--version', 'Show version' ) do
-    puts SimpleProvision::Version
-  end
-end.parse!
-
-options.merge!(type: ARGV.first)
-
-cli = SimpleProvision::CLI.new(options)
+cli = SimpleProvision::CLI.new(profile: ARGV.first, username: username, host: host)
+cli.bootstrap
 cli.configure

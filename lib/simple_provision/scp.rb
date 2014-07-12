@@ -1,15 +1,17 @@
+require 'net/scp'
+require 'byebug'
+
 module SimpleProvision
   class SCP
     FILENAME = "simpro.tar.gz"
 
-    def initialize(server, opts)
-      @server, @opts = server, opts
+    def initialize(username, host, opts)
+      @username, @host, @opts = username, host, opts
     end
 
-    def to_server
+    def copy_files
       create_local_archive
       scp_files_to_server
-      extract_remote_archive
       remove_local_archive
     end
 
@@ -38,11 +40,11 @@ module SimpleProvision
     end
 
     def scp_files_to_server
-      @server.scp("tmp/#{FILENAME}", ".")
-    end
-
-    def extract_remote_archive
-      @server.ssh("tar -xzf #{FILENAME}")
+      Net::SCP.start(@host, @username) do |scp|
+        scp.upload!("tmp/#{FILENAME}", ".")
+      end
+    rescue Net::SSH::HostKeyMismatch
+      puts "Please run ssh #{@username}@#{@host} to verify the fingerprint first"
     end
 
     def remove_local_archive
