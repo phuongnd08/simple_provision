@@ -1,12 +1,10 @@
 # Introduction
 This is based on the work that brandonhilkert initally carried to automate
-EC2 instance provision with YAML and SHELL script. It tries to bring the good spirit: SIMPLE, and JUST WORK to the world of Digital Ocean.
+EC2 instance provision with YAML and SHELL script. It tries to bring the good spirit: SIMPLE, and JUST WORK to the world of every remote machine.
 
-If you own a Digital Ocean, here is my advice: Chef and Puppet is shitty
-thing that just create more problems than it solves. It will take you
-days even weeks just to get familar and put things in the right order.
-
-With simple_provision, you get your hand dirty in a few minutes and
+I had been banging my head trying to work with Chef and Puppet in the
+past, so this is my attempt to make the provision stuff easier to be
+implemented.  With this tool, you get your hand dirty in a few minutes and
 we have the working provision profile in just half an hour. From that
 moment, provision another instance is just the matter of kicking off
 a command from the terminal.
@@ -64,7 +62,7 @@ It's up to you to use ERB, HAML or any kind of template processors.
 
 So: You put definition of each type of server in `servers/type.yml`.
 In `files` and `scripts` folder, you place files and scripts that will be
-uploaded to the Digital Ocean droplet and executed.
+uploaded to the server machine and executed there.
 
 ## Installation
 
@@ -114,8 +112,8 @@ Variables defined in `env` will be exposed to scripts during execution.
 That way you can use the same scripts for different type of server and
 still be able to produce different outcomes.
 
-## Provision your Digital Ocean server:
-`simpro my-awesome-server --droplet-name YOUR_DROPLET_NAME`
+## Provision your server
+`simpro my-awesome-server root@my-host`
 
 ## Contributing
 
