@@ -14,14 +14,35 @@ module SimpleProvision
     end
 
     def configure
-      Net::SSH.start(host, username) do |ssh|
-        ssh.exec! "tar -xzf #{SimpleProvision::SCP::FILENAME}"
-        scripts = options.fetch(:scripts).each do |script|
-          puts "Execute #{script}"
-          ssh.exec!("#{environment_exports} bash -c '#{script}'") do |channel, stream, data|
-            print data
+      begin
+        Net::SSH.start(host, username) do |ssh|
+          ssh.exec! "tar -xzf #{SimpleProvision::SCP::FILENAME}"
+          scripts = options.fetch(:scripts).each do |script|
+            puts "Execute #{script}"
+            ssh.open_channel do |ssh_channel|
+              ssh_channel.request_pty
+              ssh_channel.exec("#{environment_exports} bash -c '#{script}'") do |channel, success|
+                unless success
+                  raise "Could not execute command: #{command.inspect}"
+                end
+
+                channel.on_data do |ch, data|
+                  STDOUT << data
+                end
+
+                channel.on_extended_data do |ch, type, data|
+                  next unless type == 1
+                  STDERR << data
+                end
+              end
+            end
+            ssh.loop
           end
         end
+      rescue Net::SSH::HostKeyMismatch => exception
+        exception.remember_host!
+        sleep 0.2
+        retry
       end
     end
 
