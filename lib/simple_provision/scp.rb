@@ -1,6 +1,4 @@
 require 'net/scp'
-require 'byebug'
-
 module SimpleProvision
   class SCP
     FILENAME = "simpro.tar.gz"
