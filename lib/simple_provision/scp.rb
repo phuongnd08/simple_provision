@@ -37,6 +37,12 @@ module SimpleProvision
       scripts.each { |f| cmds << "cp #{f} tmp/scripts/" }
 
       cmds << "cd tmp && tar -czf #{FILENAME} files/ scripts/"
+
+      if ENV["VERBOSE"]
+        puts "==============Execute============"
+        puts cmds.join("\n")
+        puts "================================="
+      end
       system cmds.join("\n")
     end
 
