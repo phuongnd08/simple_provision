@@ -18,7 +18,7 @@ module SimpleProvision
 
     def default_options
       begin
-        YAML.load(File.read('servers/defaults.yml'))
+        YAML.load(File.read(server_file))
       rescue Errno::ENOENT
         {}
       end
@@ -28,12 +28,12 @@ module SimpleProvision
       begin
         YAML.load(File.read(server_file))
       rescue Errno::ENOENT
-        raise MissingServerConfiguration, "Please create a configuration file './servers/#{profile}.yml'"
+        raise MissingServerConfiguration, "Please create a configuration file './#{server_file}'"
       end
     end
 
     def server_file
-      "servers/#{profile}.yml"
+      "provision/servers/#{profile}.yml"
     end
 
     def read_and_parse_server_options

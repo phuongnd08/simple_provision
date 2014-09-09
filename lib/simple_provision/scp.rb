@@ -21,32 +21,42 @@ module SimpleProvision
       includes = files + scripts
 
       if includes.empty?
-        raise "Both files and scripts are empty. You should provide some"
+        raise "Both files and scripts are empty. You should provide some."
       end
 
-      system("mkdir tmp")
-      system("mkdir tmp/files")
-      system("mkdir tmp/scripts")
-      files.each do |f|
-        system("cp #{f} tmp/files/")
-      end
-      scripts.each do |f|
-        system("cp #{f} tmp/scripts/")
-      end
+      cmds = [
+        "cd provision",
+        "rm -rf tmp",
+        "mkdir tmp",
+        "mkdir tmp/files",
+        "mkdir tmp/scripts"
+      ]
 
-      system("cd tmp && tar -czf #{FILENAME} files/ scripts/")
+      files.each { |f| cmds << "cp #{f} tmp/files/"}
+
+      scripts.each { |f| cmds << "cp #{f} tmp/scripts/" }
+
+      cmds << "cd tmp && tar -czf #{FILENAME} files/ scripts/"
+      system cmds.join("\n")
     end
 
     def scp_files_to_server
+      path = "provision/tmp/#{FILENAME}"
+
       Net::SCP.start(@host, @username) do |scp|
-        scp.upload!("tmp/#{FILENAME}", ".")
+        scp.upload!(path, ".")
       end
     rescue Net::SSH::HostKeyMismatch
       puts "Please run ssh #{@username}@#{@host} to verify the fingerprint first"
     end
 
     def remove_local_archive
-      `rm -rf tmp`
+      cmds = [
+        "cd provision",
+        "rm -rf tmp"
+      ]
+
+      system cmds.join("\n")
     end
   end
 end
