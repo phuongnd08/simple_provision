@@ -2,15 +2,9 @@
 This is based on the work that brandonhilkert initally carried to automate
 EC2 instance provision with YAML and SHELL script. It tries to bring the good spirit: SIMPLE, and JUST WORK to the world of every remote machine.
 
-I had been banging my head trying to work with Chef and Puppet in the
-past, so this is my attempt to make the provision stuff easier to be
-implemented.  With this tool, you get your hand dirty in a few minutes and
-we have the working provision profile in just half an hour. From that
-moment, provision another instance is just the matter of kicking off
-a command from the terminal.
-
-I use simple_provision with mina in my Rails projects and the combination
-has been working really well for me.
+I used to use this to do all the provision of Redis, Postgres, Nginx,
+Unicorn, Cron, etc before. These days I just use this to provision
+docker on the server and then use crane to orchestrate the rest.
 
 Let's rock.
 
@@ -20,8 +14,8 @@ Don't forget to also checkout the recipes collection
 https://github.com/phuongnd08/simple_provision_recipes
 
 # How it works
-This gem carries the provision by uploading a set of scripts (and
-files) to the server and execute there.
+This gem carries the provision by uploading a set of scripts and
+files to the server and execute there.
 
 It's up to you to choose the language you want. I often use a mix of
 SHELL and RUBY scripts to accomplish the task. SHELL for some simple stuff
@@ -33,13 +27,29 @@ and then you can start use ruby/python. The install of ruby and python can be
 as simple as create a bash contains "yum install ruby(python) -y" and include
 it in the top of the `scripts` section in your server definition file.
 
+## Installation
+
+Add this line to your application's Gemfile:
+
+    gem 'simple_provision'
+
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install simple_provision
+
+
 # Project Structure
-As simple as it could: One or few servers definition written in YAML + setup scripts written in
-SHELL, RUBY and PYTHON + text files as resource.
-It's up to you to use ERB, HAML or any kind of template processors.
+The provision profile need to be defined inside /provision directory.
+Since it's just scripting, feel free to use ERB, HAML, or any kind of
+templates that you want, assume you install the necessary library before
+you do that.
 
 ```
-./provisions
+./provision
 ├── files
 │   ├── keys
 │   │   └── deploy_key
@@ -56,34 +66,16 @@ It's up to you to use ERB, HAML or any kind of template processors.
 │   ├── search_service_code.sh
 │   └── search_service_env.sh
 └── servers
-    ├── defaults.yml
+    ├── webapp.yml
+    ├── docker.yml
     └── search-service.yml
 ```
 
-So: You put definition of each type of server in `servers/type.yml`.
-In `files` and `scripts` folder, you place files and scripts that will be
-uploaded to the server machine and executed there.
+In /provision/servers/{webapp, docker, search-service}.yml, you define
+your server defintion (read below).
 
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'simple_provision'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install simple_provision
-
-## Servers Configuration
-
-### Server Definition
-To define a server type, create a yaml file in the `./servers` directory with the following format:
-
-`./servers/my-awesome-server.yml`
+## Server Definition
+To define a server type, create a yaml file in the `./provision/servers` directory with the following format:
 
 ```yaml
 files:
@@ -98,22 +90,17 @@ env:
   WEBROOT: /var/www/app
 ```
 
-### Shared Definitions
-
-You can share definitions across server types with `./servers/defaults.yml`
-
-```yaml
-private_key_path: /Users/bhilkert/.ssh/pd-app-server
-```
-
+File declared in files and scripts can point to anywhere in the machine
+from which you make the provision. The file path is calculated relative
+to `./provision` directory. These files/scripts will then be uploaded to
+provisioned server at ~/files and ~/scripts
 
 ### Passing variables to scripts
 Variables defined in `env` will be exposed to scripts during execution.
-That way you can use the same scripts for different type of server and
-still be able to produce different outcomes.
+That way you can re-use the same scripts for different type of servers.
 
 ## Provision your server
-`simpro my-awesome-server root@my-host`
+`bundle exec simpro my-awesome-server root@my-host`
 
 ## Contributing
 
