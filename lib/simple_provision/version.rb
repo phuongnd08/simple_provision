@@ -1,3 +1,3 @@
 module SimpleProvision
-  VERSION = "0.99.9"
+  VERSION = "0.99.10"
 end
