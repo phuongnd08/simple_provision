@@ -15,7 +15,7 @@ module SimpleProvision
 
     def configure
       begin
-        Net::SSH.start(host, username) do |ssh|
+        Net::SSH.start(host, username, :forward_agent => true) do |ssh|
           ssh.exec! "tar -xzf #{SimpleProvision::SCP::FILENAME}"
           scripts = options.fetch(:scripts).each do |script|
             puts "Execute #{script}"
