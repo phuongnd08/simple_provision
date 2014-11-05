@@ -87,6 +87,7 @@ scripts:
   - scripts/redis.sh
 env:
   DBNAME: my_db_name
+  REDISNAME: <%= ENV["REDIS_NAME"] %>
   WEBROOT: /var/www/app
 ```
 
@@ -98,6 +99,9 @@ provisioned server at ~/files and ~/scripts
 ### Passing variables to scripts
 Variables defined in `env` will be exposed to scripts during execution.
 That way you can re-use the same scripts for different type of servers.
+You can pass environment variables (available through the use of bash `export ENVNAME=value`
+or passing to `simpro` command such as `ENVNAME=value simpro`) to the
+env section using the ERB syntax (`<%= ENV['ENVNAME'] %>`).
 
 ## Provision your server
 `bundle exec simpro my-awesome-server root@my-host`
