@@ -32,7 +32,7 @@ module SimpleProvision
         "mkdir tmp/scripts"
       ]
 
-      files.each { |f| cmds << "cp #{f} tmp/files/"}
+      files.each { |f| cmds << "cp -r #{f} tmp/files/"}
 
       scripts.each { |f| cmds << "cp #{f} tmp/scripts/" }
 
