@@ -17,6 +17,7 @@ module SimpleProvision
       begin
         Net::SSH.start(host, username, :forward_agent => true) do |ssh|
           ssh.exec! "tar -xzf #{SimpleProvision::SCP::FILENAME}"
+          ssh.exec! "chmod +x scripts/*"
           scripts = options.fetch(:scripts).each do |script|
             puts "Execute #{script}"
             ssh.open_channel do |ssh_channel|
