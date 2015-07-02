@@ -38,6 +38,7 @@ module SimpleProvision
 
       cmds << "cd tmp && tar -czf #{FILENAME} files/ scripts/"
 
+
       if ENV["VERBOSE"]
         puts "==============Execute Locally============"
         puts cmds.join("\n")
